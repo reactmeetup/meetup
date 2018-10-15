@@ -1,9 +1,11 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { Container, Header, Content, Card, CardItem, Body, Button } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import List from './reusable/List';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 	render() {
 		return (
 			<Container>
@@ -19,10 +21,15 @@ export default class Home extends React.Component {
 						</CardItem>
 					</Card>
 				</Content>
+				<List data={this.props.favorites} numColumns={1} />
 			</Container>
 		);
 	}
 }
+
+const mapStateToProps = ({ favorites }) => ({ favorites });
+
+export default connect(mapStateToProps)(Home);
 
 const styles = StyleSheet.create({
 	container: {
